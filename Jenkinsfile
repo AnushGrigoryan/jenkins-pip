@@ -25,6 +25,31 @@ pipeline {
                 '''
             }
         }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    ls -la
+                    node --version
+                    npm --version
+                    npm ci
+                    if [ -e //var/lib/jenkins/jobs/jenkins_pip_1/builds/index.html]
+                        then
+                            echo "File exists."
+                    else 
+                        echo "File Doesn't exist."
+                    fi
+                    npm run test
+                    ls -la
+                '''
+            }
+                
     }
 }
+}    
 
