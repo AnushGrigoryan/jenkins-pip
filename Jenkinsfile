@@ -37,8 +37,7 @@ pipeline {
                     ls -la
                     node --version
                     npm --version
-                    npm ci
-                    if [ -e //var/lib/jenkins/jobs/jenkins_pip_1/builds/index.html]
+                    if [ -e /builds/index.html]
                         then
                             echo "File exists."
                     else 
